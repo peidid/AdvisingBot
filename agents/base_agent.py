@@ -9,7 +9,7 @@ from langchain_openai import ChatOpenAI
 from rag_engine_improved import get_retriever
 from blackboard.schema import BlackboardState, AgentOutput
 from config import get_agent_model, get_agent_temperature, get_openai_base_url
-
+#ergerg
 class BaseAgent(ABC):
     """
     Base class for all specialized agents.
