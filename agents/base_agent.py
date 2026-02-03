@@ -1,5 +1,7 @@
 """
 Base Agent Class
+1
+
 All specialized agents inherit from this base class.
 """
 from abc import ABC, abstractmethod

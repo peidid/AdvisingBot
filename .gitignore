@@ -27,7 +27,4 @@ Thumbs.db
 # Logs
 *.log
 
-# Vector databases (too large for git, rebuilt on deployment)
-chroma_db_courses/
-chroma_db_programs/
-chroma_db_policies/
+
