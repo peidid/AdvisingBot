@@ -22,9 +22,12 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# Copy application code (including pre-built ChromaDB databases)
+# Copy application code
 # Cache bust: 2024-01-29-v2
 COPY . .
+
+# Rebuild ChromaDB indexes from source data (not included in git due to size)
+RUN python rebuild_indexes_with_metadata.py || echo "Warning: Index rebuild failed, will attempt at runtime"
 
 # Create non-root user for security
 RUN adduser --disabled-password --gecos '' appuser && \
