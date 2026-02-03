@@ -15,6 +15,10 @@ from langchain_core.messages import SystemMessage
 from typing import List, Dict, Set
 import json
 import re
+import os
+
+# Use absolute path based on project root
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 class AcademicPlanningAgent(BaseAgent):
     def __init__(self):
@@ -128,9 +132,8 @@ class AcademicPlanningAgent(BaseAgent):
         schedules = {}
 
         try:
-            # Load available schedules
-            import os
-            schedule_dir = "./data/schedules"
+            # Load available schedules (using absolute path)
+            schedule_dir = os.path.join(PROJECT_ROOT, "data", "schedules")
 
             if os.path.exists(schedule_dir):
                 for filename in os.listdir(schedule_dir):
@@ -142,8 +145,8 @@ class AcademicPlanningAgent(BaseAgent):
                             key = f"{term.get('year', '')}_{term.get('term', '')}".lower()
                             schedules[key] = data
 
-            # Also check the Schedule folder for existing JSON
-            alt_schedule_dir = "./data/courses/Schedule"
+            # Also check the Schedule folder for existing JSON (using absolute path)
+            alt_schedule_dir = os.path.join(PROJECT_ROOT, "data", "courses", "Schedule")
             if os.path.exists(alt_schedule_dir):
                 for filename in os.listdir(alt_schedule_dir):
                     if filename.endswith('.json') and 'schedule_' in filename:

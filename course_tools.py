@@ -2,7 +2,9 @@ import json
 import os
 import re
 
-DATA_PATH = "./data/courses"
+# Use absolute path based on project root (same pattern as rag_engine_improved.py)
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.path.join(PROJECT_ROOT, "data", "courses")
 DB = {"courses": {}}
 
 def load_data():

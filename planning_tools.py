@@ -14,6 +14,8 @@ import re
 from typing import Dict, List, Set, Optional, Tuple
 from collections import defaultdict
 
+# Use absolute path based on project root
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # ============================================================================
 # Course Data Loading
@@ -23,11 +25,11 @@ def load_course_schedules() -> Dict[str, dict]:
     """Load all available course schedules."""
     schedules = {}
 
-    # Check multiple possible locations
+    # Check multiple possible locations (using absolute paths)
     search_dirs = [
-        "./data/schedules",
-        "./data/courses/Schedule",
-        "./data/courses/schedule"
+        os.path.join(PROJECT_ROOT, "data", "schedules"),
+        os.path.join(PROJECT_ROOT, "data", "courses", "Schedule"),
+        os.path.join(PROJECT_ROOT, "data", "courses", "schedule")
     ]
 
     for schedule_dir in search_dirs:
@@ -70,8 +72,8 @@ def load_program_requirements(program_name: str) -> Optional[dict]:
 
     search_pattern = program_map.get(program_name.lower(), program_name.lower())
 
-    # Search in program directories
-    programs_dir = "./data/programs"
+    # Search in program directories (using absolute path)
+    programs_dir = os.path.join(PROJECT_ROOT, "data", "programs")
 
     if not os.path.exists(programs_dir):
         return None
@@ -103,7 +105,7 @@ def load_sample_curriculum(program_name: str) -> Optional[List[dict]]:
 
     search_pattern = program_map.get(program_name.lower(), program_name)
 
-    programs_dir = "./data/programs"
+    programs_dir = os.path.join(PROJECT_ROOT, "data", "programs")
 
     if not os.path.exists(programs_dir):
         return None
